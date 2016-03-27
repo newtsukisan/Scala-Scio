@@ -3,11 +3,41 @@ package basic
 /**
   * Created by trabajo on 27/03/16.
   */
+import basic.Recurrencia._
+
 import collection.mutable.Stack
 import org.scalatest._
 
 class TestRecurrencia extends FlatSpec {
 
+  /**
+    * Simple Testing values
+    */
+  val Juan  = Person("Juan",List())
+  val Sonia = Person("Sonia",List())
+  val Pedro = Person("Pedro",List(Sonia,Juan))
+  val Clara = Person("Clara",List(Pedro))
+
+  "Juan" should "have himself as a  friend" in {
+    assert(getPersons(Juan,hasName("Juan")).length >0)
+  }
+  it should "no have a friends with name Clara" in {
+    assert(getPersons(Juan,hasName("Pedro")).length === 0)
+  }
+  it should "no have friends" in {
+    assert(Juan.friends === List())
+  }
+
+  "Clara" must "have a friend whose name is Juan" in {
+    assert(getPersons(Clara,hasName("Juan")) === List(Juan))
+  }
+
+   it must "have a friend whose name is Pedro and Pedro has Juan and Sonia as friends"  in {
+     val amigo_Clara  = getPersons(Clara,hasName("Pedro"))
+     val amigos_Amigo =showFromLop((amigo_Clara  map (getFriends)) flatten)
+     assert(amigo_Clara  === List(Pedro))
+     assert(amigos_Amigo === "Pedro, Sonia, Juan")
+   }
 
   "A sorter"  must "maintain length of list" in {
     val lista_1     = List(1,2,3,5,7)
