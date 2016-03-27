@@ -21,17 +21,19 @@ class TestRecurrencia extends FlatSpec {
   "Juan" should "have himself as a  friend" in {
     assert(getPersons(Juan,hasName("Juan")).length >0)
   }
-  it should "no have a friends with name Clara" in {
+  it should "has not a friends with name Clara" in {
     assert(getPersons(Juan,hasName("Pedro")).length === 0)
   }
-  it should "no have friends" in {
+  it should "has not friends" in {
     assert(Juan.friends === List())
+  }
+  it should "has a name which is Juan" in {
+    assert(Juan.name === "Juan")
   }
 
   "Clara" must "have a friend whose name is Juan" in {
     assert(getPersons(Clara,hasName("Juan")) === List(Juan))
   }
-
    it must "have a friend whose name is Pedro and Pedro has Juan and Sonia as friends"  in {
      val amigo_Clara  = getPersons(Clara,hasName("Pedro"))
      val amigos_Amigo =showFromLop((amigo_Clara  map (getFriends)) flatten)
