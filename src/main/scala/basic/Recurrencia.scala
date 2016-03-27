@@ -25,37 +25,44 @@ object Recurrencia {
     * @param friends
     */
   case class Person (name : String, friends : List[Person]) {
-    override def toString: String = name
+    //override def toString: String = name
   }
 
   /**
-    * Get list of person using natural recursion
+    * Get list of person using natural recursion. Introduce an predicative function to select persons.
+    * This function takes a person and all his friends and return only those that satisfied predicative
+    * function
     * @param person
-    * @param name
+    * @param predicative
     * @return
     */
-  def getPersons (person: Person, name: String): List[Person] =  person match {
-    case p if p.name == name => person ::  getPersonsfromFriends (person.friends, name)
-    case _                   => getPersonsfromFriends (person.friends, name)
+  def getPersons (person: Person, predicative: (Person => Boolean)): List[Person] =  person match {
+    case p if predicative(p) => person ::  getPersonsfromFriends (person.friends, predicative)
+    case _                   => getPersonsfromFriends (person.friends, predicative)
   }
 
   /**
     * ListofPerson, Name -> listofPerson
     * @param persons
-    * @param name
+    * @param predicative
     * @return
     */
-  def getPersonsfromFriends(persons: List[Person],name: String): List[Person] = persons match{
+  def getPersonsfromFriends(persons: List[Person],predicative: (Person => Boolean)): List[Person] = persons match{
     case Nil           => Nil           // Base Case
     case (head::tail)  => {             // Natural Recursion
-      getPersons(head,name) ++ getPersonsfromFriends(tail, name)
+      getPersons(head,predicative) ++ getPersonsfromFriends(tail, predicative)
     }
   }
 
-  def hasName(p: Person, name: String): Boolean = name match {
+  /**
+    * This function
+    * @param name
+    * @param p
+    * @return boolean if the person has this name
+    */
+  def hasName(name: String)(p: Person): Boolean = name match {
     case p.name => true
     case _      => false
-
 
   }
 

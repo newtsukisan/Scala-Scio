@@ -7,10 +7,11 @@ val Pedro = Person("Pedro",List(Sonia,Juan))
 val Clara = Person("Clara",List(Pedro))
 
 
-println(getPersons(Clara,"Juan"))
-
-
-hasName(Pedro, "Pedro")
+//Podemos utilizar el currying para aplicar la funcion
+// parcialemente
+hasName("Pedro")(Pedro)
+//Buscamos los amigos de clara que se llamen Juan
+getPersons(Clara,hasName("Pedro"))
 
 
 
