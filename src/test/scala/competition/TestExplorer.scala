@@ -22,12 +22,23 @@ class TestExplorer extends FlatSpec{
     assert(state.update(1,2,3) === explorer.State(Vector(3),3))
   }
 
-  "A explorer" should "have a initial State"   in {
+  "This explorer" should "have a initial State"   in {
     assert(explorer.initialState === explorer.State(Vector(1,2,3),0))
   }
-    it must "generate all possibles operations from one state" in {
-      assert(explorer.movesFrom(explorer.initialState) === firstMove)
-    }
 
-
+  it must "find a solution for 6" in {
+    assert(explorer.getSolutionFor(6) != Stream())
+  }
+  it must "find a solution for 5" in {
+    assert(explorer.getSolutionFor(5) != Stream())
+  }
+  it must "find a solution for 4" in {
+    assert(explorer.getSolutionFor(4) != Stream())
+  }
+  it must "find a solution for 9" in {
+    assert(explorer.getSolutionFor(9) != Stream())
+  }
+  it must "find a solution for 11" in {
+    assert(explorer.getSolutionFor(11) != Stream())
+  }
 }

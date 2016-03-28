@@ -8,4 +8,8 @@ state.update(1,2,3)
 println("states ")
 explorer.movesFrom(explorer.initialState)
 
+val solt = explorer.getSolutionFor(11)
+
+ solt == Stream()
+ solt tail
 

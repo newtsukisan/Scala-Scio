@@ -75,6 +75,8 @@ class Explorer (val initialOperands: Vector[Int]) {
     def change(state: State): State = state.update(cociente, divisor, cociente / divisor)
   }
 
+
+  // ; if op1 > op2
   /**
     * From a state, calculate all possibles combinations of operands and all possible operations can be executed
     * @param state  initial state
@@ -84,7 +86,7 @@ class Explorer (val initialOperands: Vector[Int]) {
     val operandos = state.operandos    // operandos are all numbers in a state
     val resultados = (for(op1 <- operandos; op2 <- operandos; if op1 > op2 ) yield
       Suma(op1, op2)) ++
-      (for(op1 <- operandos; op2 <- operandos; if op1 > op2 ) yield
+      (for(op1 <- operandos; op2 <- operandos; if op1 > op2) yield
         Producto(op1, op2)) ++
       (for(op1 <- operandos; op2 <- operandos; if op1 > op2 ) yield
         Resta(op1, op2)) ++ //only integer divisions
@@ -151,7 +153,25 @@ class Explorer (val initialOperands: Vector[Int]) {
   val pathSets = from (Set(initialPath)) //All possible paths generated are store here
   //--------------------------------------------------------------------------------------------------------------------
 
+  /**
+    * looking for solution
+    * @param target  number to be get
+    * @return
+    */
+  private def solutionFor(target: Int): Stream[Path] =
+    for{
+      paths <- pathSets
+      path  <- paths
+      value = path.endState.resultado
+      if value == target             // we have found solution
+    } yield path
 
+  /**
+    *
+    * @param target   the number which we are looking for
+    * @return         the target with all states until solution
+    */
+  def getSolutionFor(target: Int): Stream[Path] = solutionFor(target)
 
 
 
