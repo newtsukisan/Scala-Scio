@@ -117,22 +117,23 @@ class Explorer (val initialOperands: Vector[Int]) {
     * @return       all possible operations of combining all operands in the state
     */
   def movesFrom(state: State) = {
-    val operandos = state.operandos         // operandos are all numbers in a state
+    val operandos = state.operandos    // operands are all numbers in a state
     val resultados = (
         for(op1 <- operandos;
             op2 <- operandos)
-          yield Suma(op1, op2)) ++          // ADDIND operation no filtering
-       (for(op1 <- operandos;
-            op2 <- operandos)
-        yield Producto(op1, op2)) ++        // PRODUCT OPERATION
+          yield Suma(op1, op2)) ++    // ADDING operation no filtering
        (for(op1 <- operandos;
             op2 <- operandos
-            if op1 > op2 )
-         yield Resta(op1, op2)) ++         // SUBSTRACT OPERATION
+            if validMult(op1,op2))    // valid product operators
+        yield Producto(op1, op2)) ++  // PRODUCT OPERATION
        (for(op1 <- operandos;
             op2 <- operandos
-            if op1 > op2; if op1 % op2 == 0)
-         yield Division(op1, op2))
+            if op1 > op2 )           // valid substract operators
+         yield Resta(op1, op2)) ++   // SUBSTRACT OPERATION
+       (for(op1 <- operandos;
+            op2 <- operandos
+            if validDiv(op1,op2))   // division valid operators
+         yield Division(op1, op2))  // DIVIDING OPERATOR
     resultados
   }
 
