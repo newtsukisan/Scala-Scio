@@ -5,11 +5,15 @@ package basic
   */
 import basic.Recurrencia._
 
-import collection.mutable.Stack
+
 import org.scalatest._
 
-class TestRecurrencia extends FlatSpec {
+import org.scalatest.Tag
 
+object SlowTest extends Tag("com.mycompany.tags.SlowTest")
+object DbTest extends Tag("com.mycompany.tags.DbTest")
+
+class TestRecurrencia extends FlatSpec {
   /**
     * Simple Testing values
     */
@@ -19,7 +23,7 @@ class TestRecurrencia extends FlatSpec {
   val Clara = Person("Clara",List(Pedro))
 
   "Juan" should "have himself as a  friend" in {
-    assert(getPersons(Juan,hasName("Juan")).length >0)
+    assert(getPersons(Juan, hasName("Juan")).nonEmpty)
   }
   it should "has not a friends with name Clara" in {
     assert(getPersons(Juan,hasName("Pedro")).length === 0)
@@ -28,7 +32,9 @@ class TestRecurrencia extends FlatSpec {
     assert(Juan.friends === List())
   }
   it should "has a name which is Juan" in {
-    assert(Juan.name === "Juan")
+    assertResult("Juan"){
+      Juan.name
+    }
   }
 
   "Clara" must "have a friend whose name is Juan" in {
@@ -36,12 +42,12 @@ class TestRecurrencia extends FlatSpec {
   }
    it must "have a friend whose name is Pedro and Pedro has Juan and Sonia as friends"  in {
      val amigo_Clara  = getPersons(Clara,hasName("Pedro"))
-     val amigos_Amigo =showFromLop((amigo_Clara  map (getFriends)) flatten)
+     val amigos_Amigo =showFromLop(amigo_Clara.flatMap(getFriends))
      assert(amigo_Clara  === List(Pedro))
      assert(amigos_Amigo === "Pedro, Sonia, Juan")
    }
 
-  "A sorter"  must "maintain length of list" in {
+  "A sorter"  must "maintain length of list" taggedAs DbTest in {
     val lista_1     = List(1,2,3,5,7)
     val long_1      = lista_1.length
     val test_long   = Recurrencia.sorter(lista_1).length
@@ -57,7 +63,6 @@ class TestRecurrencia extends FlatSpec {
   }
   it must "order well a list" in {
     val lista_1     = List(11,256,13,55,77)
-    val test_list   = Recurrencia.sorter(lista_1)
     assert(Recurrencia.sorter(lista_1) === List(11,13,55,77,256))
   }
 }
