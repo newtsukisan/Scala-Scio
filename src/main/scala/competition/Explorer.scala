@@ -84,9 +84,9 @@ class Explorer (val initialOperands: Vector[Int]) {
     */
   def movesFrom(state: State) = {
     val operandos = state.operandos    // operandos are all numbers in a state
-    val resultados = (for(op1 <- operandos; op2 <- operandos; if op1 > op2 ) yield
+    val resultados = (for(op1 <- operandos; op2 <- operandos) yield
       Suma(op1, op2)) ++
-      (for(op1 <- operandos; op2 <- operandos; if op1 > op2) yield
+      (for(op1 <- operandos; op2 <- operandos) yield
         Producto(op1, op2)) ++
       (for(op1 <- operandos; op2 <- operandos; if op1 > op2 ) yield
         Resta(op1, op2)) ++ //only integer divisions
