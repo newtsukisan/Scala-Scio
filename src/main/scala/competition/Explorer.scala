@@ -75,6 +75,40 @@ class Explorer (val initialOperands: Vector[Int]) {
     def change(state: State): State = state.update(cociente, divisor, cociente / divisor)
   }
 
+  /**
+    * Function for filtering valid combination in multiplication operations
+    * @param op1  fisrt operand
+    * @param op2  second operand
+    * @return
+    */
+  def validMult (op1: Int, op2: Int): Boolean = {
+     if       (op1 == 1 || op2 == 1) {       // no take into account multiply by 1
+       false
+     }else if (op1 == 0 || op2 == 0) {      // no take into account multiply by 0
+       false
+     }else if (op1 <= op2){                 // only one of the possibles pairs
+       false
+     }else {                                // without other limitations
+       true
+     }//end if
+  }//end validMult
+  /**
+    * For filtering in movesFrom in dividing operations
+    * @param op1  fisrt operand
+    * @param op2  second operand
+    * @return
+    */
+  def validDiv (op1: Int, op2: Int): Boolean = {
+    if       (op1 == 0 || op2 == 0)  {      // no take into account  zero results o zero divisors
+      false
+    }else if (op1 % op2 != 0)        {      // no  divisions with remaining != 0
+      false
+    }else if (op1 < op2)             {      // only one of the possibles pairs
+      false
+    }else {                                 // without other limitations  true
+      true
+    }//end if
+  }//end validMult
 
   // ; if op1 > op2
   /**
@@ -83,15 +117,22 @@ class Explorer (val initialOperands: Vector[Int]) {
     * @return       all possible operations of combining all operands in the state
     */
   def movesFrom(state: State) = {
-    val operandos = state.operandos    // operandos are all numbers in a state
-    val resultados = (for(op1 <- operandos; op2 <- operandos) yield
-      Suma(op1, op2)) ++
-      (for(op1 <- operandos; op2 <- operandos) yield
-        Producto(op1, op2)) ++
-      (for(op1 <- operandos; op2 <- operandos; if op1 > op2 ) yield
-        Resta(op1, op2)) ++ //only integer divisions
-      (for(op1 <- operandos; op2 <- operandos; if op1 > op2; if op1 % op2 == 0 ) yield
-        Division(op1, op2))
+    val operandos = state.operandos         // operandos are all numbers in a state
+    val resultados = (
+        for(op1 <- operandos;
+            op2 <- operandos)
+          yield Suma(op1, op2)) ++          // ADDIND operation no filtering
+       (for(op1 <- operandos;
+            op2 <- operandos)
+        yield Producto(op1, op2)) ++        // PRODUCT OPERATION
+       (for(op1 <- operandos;
+            op2 <- operandos
+            if op1 > op2 )
+         yield Resta(op1, op2)) ++         // SUBSTRACT OPERATION
+       (for(op1 <- operandos;
+            op2 <- operandos
+            if op1 > op2; if op1 % op2 == 0)
+         yield Division(op1, op2))
     resultados
   }
 
