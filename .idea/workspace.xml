@@ -11,8 +11,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.10/test-classes/basic/TestRecurrencia$$anonfun$3.class" afterPath="$PROJECT_DIR$/target/scala-2.10/test-classes/basic/TestRecurrencia$$anonfun$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.10/test-classes/basic/TestRecurrencia.class" afterPath="$PROJECT_DIR$/target/scala-2.10/test-classes/basic/TestRecurrencia.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/competition/Explorer.scala" afterPath="$PROJECT_DIR$/src/main/scala/competition/Explorer.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/worksheets/exploring.sc" afterPath="$PROJECT_DIR$/src/main/scala/worksheets/exploring.sc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/competition/TestExplorer.scala" afterPath="$PROJECT_DIR$/src/test/scala/competition/TestExplorer.scala" />
     </list>
     <ignored path="scio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,15 +83,24 @@
       <file leaf-file-name="Explorer.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/competition/Explorer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-250">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="330">
+              <caret line="155" column="2" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
               <folding>
+                <element signature="e#21#216#0" expanded="false" />
+                <element signature="e#272#679#0" expanded="false" />
                 <element signature="e#745#974#0" expanded="false" />
+                <element signature="e#745#1279#0" expanded="false" />
                 <element signature="e#1413#1482#0" expanded="false" />
                 <element signature="e#1546#1665#0" expanded="false" />
                 <element signature="e#1802#1937#0" expanded="false" />
                 <element signature="e#2089#2223#0" expanded="false" />
                 <element signature="e#2363#2518#0" expanded="false" />
+                <element signature="e#2686#2926#0" expanded="false" />
+                <element signature="e#2686#3501#0" expanded="false" />
+                <element signature="e#3505#3713#0" expanded="false" />
+                <element signature="e#3906#4131#0" expanded="false" />
+                <element signature="e#4245#4301#0" expanded="false" />
+                <element signature="e#4437#4515#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -845,7 +852,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -890,12 +897,21 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#21#216#0" expanded="false" />
+            <element signature="e#272#679#0" expanded="false" />
             <element signature="e#745#974#0" expanded="false" />
+            <element signature="e#745#1279#0" expanded="false" />
             <element signature="e#1413#1482#0" expanded="false" />
             <element signature="e#1546#1665#0" expanded="false" />
             <element signature="e#1802#1937#0" expanded="false" />
             <element signature="e#2089#2223#0" expanded="false" />
             <element signature="e#2363#2518#0" expanded="false" />
+            <element signature="e#2686#2926#0" expanded="false" />
+            <element signature="e#2686#3501#0" expanded="false" />
+            <element signature="e#3505#3713#0" expanded="false" />
+            <element signature="e#3906#4131#0" expanded="false" />
+            <element signature="e#4245#4301#0" expanded="false" />
+            <element signature="e#4437#4515#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -960,15 +976,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/competition/Explorer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-250">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="330">
+          <caret line="155" column="2" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
           <folding>
+            <element signature="e#21#216#0" expanded="false" />
+            <element signature="e#272#679#0" expanded="false" />
             <element signature="e#745#974#0" expanded="false" />
+            <element signature="e#745#1279#0" expanded="false" />
             <element signature="e#1413#1482#0" expanded="false" />
             <element signature="e#1546#1665#0" expanded="false" />
             <element signature="e#1802#1937#0" expanded="false" />
             <element signature="e#2089#2223#0" expanded="false" />
             <element signature="e#2363#2518#0" expanded="false" />
+            <element signature="e#2686#2926#0" expanded="false" />
+            <element signature="e#2686#3501#0" expanded="false" />
+            <element signature="e#3505#3713#0" expanded="false" />
+            <element signature="e#3906#4131#0" expanded="false" />
+            <element signature="e#4245#4301#0" expanded="false" />
+            <element signature="e#4437#4515#0" expanded="false" />
           </folding>
         </state>
       </provider>

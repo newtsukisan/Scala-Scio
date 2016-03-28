@@ -93,5 +93,66 @@ class Explorer (val initialOperands: Vector[Int]) {
     resultados
   }
 
+  /**
+    * This class is used for storing all states and all operations generated
+    * @param stateHistory   list with all states generated
+    * @param movesHistory   list with all movements generated
+    */
+  class Path(stateHistory: List[State], movesHistory: List[Operation]){
+    def endState: State = if (stateHistory.isEmpty) initialState
+        else stateHistory.head //last in first out
+    /**
+      * Add state and movements to history
+      * @param state     new state to be added
+      * @param move      new movemente to be added
+      * @return          a path with this state and this movement added
+      */
+    def extend(state: State, move: Operation): Path = new Path(state :: stateHistory, move :: movesHistory)
+
+    /**
+      * for presenting path
+      * @return
+      */
+    def representacion = {
+      for (n <- movesHistory.indices)
+        yield (movesHistory(n), stateHistory(n).operandos)
+    }
+
+    /**
+      * String representation of the path
+      *
+      * @return
+      */
+    override def toString: String = initialState  + " -> " + (representacion.reverse mkString " -> ") + "-->" + endState.resultado
+  }
+
+  val initialPath = new Path(List(initialState), Nil)  // initial Path
+
+  /**
+    * From every singel path in the set of all paths,
+    * get the last state.
+    *
+    * @param paths Set of all paths with every path of combination
+    * @return      Set of all path with the new generated added
+    */
+  def from(paths: Set[Path]): Stream[Set[Path]] =
+    if (paths.isEmpty) Stream.empty
+    else {
+      val more = for {
+        path   <- paths
+        state = path.endState
+        // for every state, generate every possible movements (operation) and generate all possibles states
+        next   <- movesFrom(state) map (move => path.extend(move.change(state), move))
+      }yield next //end for loop
+      paths #:: from(more)  // adding the next generation
+    }//end if else
+
+  //--------------------------------------------------------------------------------------------------------------------
+  val pathSets = from (Set(initialPath)) //All possible paths generated are store here
+  //--------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 }//end class
