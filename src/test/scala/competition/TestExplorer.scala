@@ -2,6 +2,7 @@ package competition
 
 import org.scalatest._
 
+
 /**
   * Created by trabajo on 28/03/16.
   */
