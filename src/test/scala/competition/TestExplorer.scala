@@ -7,7 +7,7 @@ import commons.timing
   * Created by trabajo on 28/03/16.
   */
 class TestExplorer extends FlatSpec{
-
+  //This is not the best time. Compile solution is better.
   val time_require: Long  = 5000000000L
 
   val explorer = new Explorer(Vector(1,2,3))

@@ -103,24 +103,23 @@ class Explorer (val initialOperands: Vector[Int]) {
   }
   //--------------------------------------------------------------------------------------------------------------------
 
-
   /**
     * next steps with all possible combinations of valid operators
     * @param state state from calculate all possibles operators.
     *
     */
   def movesFrom1 (state: State) = {
-    val operandos       = state.operandos                             // fisrt obtaining operands
+    val operandos       = state.operandos                             // first obtaining operands
     val combinations    = commons.allCombinations (operandos.toList)  // all combinations
-    val add_operands    = combinations                                //.filter(valid_sum)       is not need
-    val sub_operands    = combinations                                //.filter(valid_substract) is not need
-    val mul_operands    = combinations.filter(valid_mult)
-    val div_operands    = combinations.filter(valid_div)
-    val adds       =   add_operands map (lst => Suma(lst.head,lst.last))
-    val subs       =   sub_operands map (lst => Resta(lst.head,lst.last))
-    val muls       =   mul_operands map (lst => Producto(lst.head,lst.last))
-    val divs       =   div_operands map (lst => Division(lst.head,lst.last))
-    (adds ++ subs ++ muls ++ divs).toVector
+    // create list of valid filters for each operation and operators.
+    val operators       = List(Suma, Resta, Producto, Division)       // operator
+    val filters         = List(valid_sum _, valid_substract _, valid_mult _, valid_div _)
+    // filter for each filter using map
+    val filtrados = filters map (f => combinations.filter(f))         // list of filter foreach operator
+    // zip an apply each operator to its list of valid pairs
+    val total = (operators zip filtrados).map {case (clase,lista) => lista.map {case List(op1,op2) => clase (op1,op2)}}
+    // finally flatten
+    total.flatten
   }//val adding_operands =
 
   //--------------------------------------------------------------------------------------------------------------------
