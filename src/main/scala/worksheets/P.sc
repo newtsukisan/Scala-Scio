@@ -24,3 +24,5 @@ getPersons(Clara,hasName("Pedro"))
 
 List().length
 
+(1 to 10).length
+
