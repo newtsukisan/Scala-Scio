@@ -1,6 +1,7 @@
 import competition.Explorer
 import commons.allCombinations
 import commons.time
+import commons.timing
 
 
 
@@ -24,4 +25,5 @@ val lista = List(1,2)
 
 explorer.movesFrom1 (explorer.State(Vector(3,2,1),0))
 time (explorer.getSolutionFor(765))
+timing(explorer.getSolutionFor(765))
 

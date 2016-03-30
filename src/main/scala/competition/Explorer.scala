@@ -77,41 +77,7 @@ class Explorer (val initialOperands: Vector[Int]) {
   case class Division(cociente: Int, divisor: Int) extends Operation{
     def change(state: State): State = state.update(cociente, divisor, cociente / divisor)
   }
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-    * Function for filtering valid combination in multiplication operations
-    * @param op1  fisrt operand
-    * @param op2  second operand
-    * @return
-    */
-  def validMult (op1: Int, op2: Int): Boolean = {
-     if       (op1 == 1 || op2 == 1) {       // no take into account multiply by 1
-       false
-     }else if (op1 == 0 || op2 == 0) {      // no take into account multiply by 0
-       false
-     }else if (op1 <= op2){                 // only one of the possibles pairs
-       false
-     }else {                                // without other limitations
-       true
-     }//end if
-  }//end validMult
-  /**
-    * For filtering in movesFrom in dividing operations
-    * @param op1  fisrt operand
-    * @param op2  second operand
-    * @return
-    */
-  def validDiv (op1: Int, op2: Int): Boolean = {
-    if       (op1 == 0 || op2 == 0)  {      // no take into account  zero results o zero divisors
-      false
-    }else if (op1 % op2 != 0)        {      // no  divisions with remaining != 0
-      false
-    }else if (op1 < op2)             {      // only one of the possibles pairs
-      false
-    }else {                                 // without other limitations  true
-      true
-    }//end if
-  }//end validMult
+
 
   //--------------------------------------------------------------------------------------------------------------------
   //-------------------------------- for this list we can filter for each operation ------------------------------------
@@ -146,8 +112,8 @@ class Explorer (val initialOperands: Vector[Int]) {
   def movesFrom1 (state: State) = {
     val operandos       = state.operandos                             // fisrt obtaining operands
     val combinations    = commons.allCombinations (operandos.toList)  // all combinations
-    val add_operands    = combinations                                //.filter(valid_sum)
-    val sub_operands    = combinations                                //.filter(valid_substract)
+    val add_operands    = combinations                                //.filter(valid_sum)       is not need
+    val sub_operands    = combinations                                //.filter(valid_substract) is not need
     val mul_operands    = combinations.filter(valid_mult)
     val div_operands    = combinations.filter(valid_div)
     val adds       =   add_operands map (lst => Suma(lst.head,lst.last))
@@ -157,34 +123,6 @@ class Explorer (val initialOperands: Vector[Int]) {
     (adds ++ subs ++ muls ++ divs).toVector
   }//val adding_operands =
 
-  // ; if op1 > op2
-  /**
-    * From a state, calculate all possibles combinations of operands and all possible operations can be executed
-    * @param state  initial state
-    * @return       all possible operations of combining all operands in the state
-    */
-
-  def movesFrom(state: State) = {
-    val operandos = state.operandos    // operands are all numbers in a state
-    val resultados = (
-        for(op1 <- operandos;
-            op2 <- operandos
-            )
-          yield Suma(op1, op2)) ++    // ADDING operation no filtering
-       (for(op1 <- operandos;
-            op2 <- operandos
-            if validMult(op1,op2))    // valid product operators
-        yield Producto(op1, op2)) ++  // PRODUCT OPERATION
-       (for(op1 <- operandos;
-            op2 <- operandos
-            if op1 > op2 )           // valid substract operators
-         yield Resta(op1, op2)) ++   // SUBSTRACT OPERATION
-       (for(op1 <- operandos;
-            op2 <- operandos
-            if validDiv(op1,op2))   // division valid operators
-         yield Division(op1, op2))  // DIVIDING OPERATOR
-    resultados
-  }
   //--------------------------------------------------------------------------------------------------------------------
   /**
     * This class is used for storing all states and all operations generated
@@ -263,7 +201,7 @@ class Explorer (val initialOperands: Vector[Int]) {
     * @return         the target with all states until solution
     */
   def getSolutionFor(target: Int): Stream[Path] = solutionFor(target)
-
+  //Todo tolerance for no exact solutions
 
 
 }//end class
