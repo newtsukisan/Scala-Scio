@@ -120,7 +120,7 @@ class Explorer (val initialOperands: Vector[Int]) {
     val total = (operators zip filtrados).map {case (clase,lista) => lista.map {case List(op1,op2) => clase (op1,op2)}}
     // finally flatten
     total.flatten
-  }//val adding_operands =
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -159,7 +159,7 @@ class Explorer (val initialOperands: Vector[Int]) {
   val initialPath = new Path(List(initialState), Nil)  // initial Path
 
   /**
-    * From every singel path in the set of all paths,
+    * From every single path in the set of all paths,
     * get the last state.
     *
     * @param paths Set of all paths with every path of combination

@@ -77,4 +77,37 @@ object Recurrencia {
     case Nil           => Nil
     case (head::tail ) => getFriends (head) ++ getFriendsOfLOP(tail)
   } //end method
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+    * Using parameters for general use
+    * @param lista    which elements are needs to be combined using variations
+    * @param takenby  number of elements in each variation
+    * @tparam T
+    * @return         Set[List[T]]
+    */
+  def variations [T] (lista : List[T], takenby : Int) : Set[List[T]] = {
+    val n = lista.length              // length of the list
+    def inner (k : Int): Set[List[T]] = {
+      if (k == (n - takenby)) Set(List())
+      else
+        for {
+          variar    <- inner(k - 1)   // gives the number of each combination
+          elements  <- lista          // elements in each combination
+        } yield elements :: variar
+    }   // end inner
+    inner (n)
+  }     // end method
+
+  /**
+    * method for presenting any set of list
+    * @param conjunto  set of list to be presented
+    * @tparam T
+    */
+  def presentar [T](conjunto : Set[List[T]]) : Unit = {
+    val listas = conjunto.toList
+    for
+    (lista <- listas)
+    {println (lista)}
+  }
+  //--------------------------------------------------------------------------------------------------------------------
 }
